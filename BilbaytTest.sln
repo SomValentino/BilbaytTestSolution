@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bilbayt.Web.API", "Bilbayt.Web.API\Bilbayt.Web.API.csproj", "{406CF87C-6012-417F-99BA-EE940BB28C4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD30BC25-0C96-45CB-95B9-B3F8D808C1AC}
+	EndGlobalSection
+EndGlobal
