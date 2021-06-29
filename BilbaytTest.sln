@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bilbayt.Web.API", "Bilbayt.Web.API\Bilbayt.Web.API.csproj", "{406CF87C-6012-417F-99BA-EE940BB28C4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bilbayt.Domain", "Bilbayt.Models\Bilbayt.Domain.csproj", "{92D39B9F-F9F3-4DBB-B07E-0B35D6E0D724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bilbayt.Data", "Bilbayt.Data\Bilbayt.Data.csproj", "{D2B16D41-B1FE-4AA2-8110-156CAE8D7568}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{406CF87C-6012-417F-99BA-EE940BB28C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D39B9F-F9F3-4DBB-B07E-0B35D6E0D724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D39B9F-F9F3-4DBB-B07E-0B35D6E0D724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D39B9F-F9F3-4DBB-B07E-0B35D6E0D724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D39B9F-F9F3-4DBB-B07E-0B35D6E0D724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2B16D41-B1FE-4AA2-8110-156CAE8D7568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2B16D41-B1FE-4AA2-8110-156CAE8D7568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2B16D41-B1FE-4AA2-8110-156CAE8D7568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2B16D41-B1FE-4AA2-8110-156CAE8D7568}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
