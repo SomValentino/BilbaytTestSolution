@@ -1,3 +1,8 @@
+using Bilbayt.Data.Context;
+using Bilbayt.Data.Interfaces;
+using Bilbayt.Data.Repositories;
+using Bilbayt.Web.API.Services;
+using Bilbayt.Web.API.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Bilbayt.Web.API
 {
@@ -32,6 +40,42 @@ namespace Bilbayt.Web.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bilbayt.Web.API", Version = "v1" });
             });
+
+            services.Configure<DataContextSetting>(
+               Configuration.GetSection(nameof(DataContextSetting)));
+
+            services.AddSingleton<IDataContextSetting>(sp =>
+                sp.GetRequiredService<IOptions<DataContextSetting>>().Value);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                  .AddJwtBearer(options =>
+                  {
+                      options.TokenValidationParameters = new TokenValidationParameters
+                      {
+                          ValidateIssuer = true,
+                          ValidateAudience = true,
+                          ValidateIssuerSigningKey = true,
+                          ValidIssuer = issuer,
+                          ValidAudience = issuer,
+                          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+                      };
+
+                      options.Events = new JwtBearerEvents
+                      {
+                          OnAuthenticationFailed = context =>
+                          {
+                              if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                              {
+                                  context.Response.Headers.Add("Token-Expired", "true");
+                              }
+                              return Task.CompletedTask;
+                          }
+                      };
+                  });
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILoginService, LoginService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +92,7 @@ namespace Bilbayt.Web.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

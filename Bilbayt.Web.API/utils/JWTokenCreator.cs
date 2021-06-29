@@ -12,7 +12,7 @@ namespace Bilbayt.Web.API.utils
 {
     public class JWTokenCreator
     {
-        public static string GenerateAccessToken(IEnumerable<Claim> claims, string jwtSigningKey, double expiry)
+        public static string GenerateAccessToken(IEnumerable<Claim> claims, string jwtSigningKey, double expiry, string issuer)
         {
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtSigningKey));
 
@@ -22,7 +22,9 @@ namespace Bilbayt.Web.API.utils
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddSeconds(expiry),
-                SigningCredentials = credentials
+                SigningCredentials = credentials,
+                Issuer = issuer,
+                Audience = issuer
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

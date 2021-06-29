@@ -10,5 +10,6 @@ namespace Bilbayt.Web.API.Services.Interfaces
     public interface IUserService
     {
         Task<ApplicationUser> CreateUser(ApplicationUser user);
+        Task<ApplicationUser> GetUserByUsername(string username);
     }
 }

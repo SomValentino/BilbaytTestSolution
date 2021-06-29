@@ -24,5 +24,10 @@ namespace Bilbayt.Web.API.Services
 
             return usrdb;
         }
+
+        public Task<ApplicationUser> GetUserByUsername(string username)
+        {
+            return _userRepository.GetUserByUsernameAsync(username);
+        }
     }
 }

@@ -28,8 +28,11 @@ namespace Bilbayt.Web.API.Services
             if (result.IsSuccess)
             {
                 // Todo: get JWT token
-                result.Token = JWTokenCreator.GenerateAccessToken(new[] { new Claim(ClaimTypes.PrimarySid, user.Id) },
-                    _configuration.GetValue<string>("jwtSecret"), _configuration.GetValue<double>("jwtExpiry"));
+                var secret = _configuration.GetValue<string>("jwtSecret");
+                var expiry = _configuration.GetValue<double>("jwtExpiry");
+                var issuer = _configuration.GetValue<double>("baseUrl");
+
+                result.Token = JWTokenCreator.GenerateAccessToken(new[] { new Claim("Id", user.Id) },secret ,expiry,issuer );
 
                 return result;
             }
