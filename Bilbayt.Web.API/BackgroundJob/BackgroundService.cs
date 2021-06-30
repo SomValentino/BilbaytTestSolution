@@ -23,7 +23,7 @@ namespace Bilbayt.Web.API.BackgroundJob
             _timer?.Dispose();
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public virtual async Task StartAsync(CancellationToken cancellationToken)
         {
             await ScheduleJob(cancellationToken);
         }
@@ -65,7 +65,7 @@ namespace Bilbayt.Web.API.BackgroundJob
 
         protected abstract Task DoWork(CancellationToken cancellationToken);
 
-        public async Task StopAsync(CancellationToken cancellationToken)
+        public virtual async Task StopAsync(CancellationToken cancellationToken)
         {
             _timer?.Stop();
             await Task.CompletedTask;
