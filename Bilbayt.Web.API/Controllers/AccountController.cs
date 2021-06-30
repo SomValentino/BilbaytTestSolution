@@ -30,11 +30,16 @@ namespace Bilbayt.Web.API.Controllers
 
             if (user != null) return BadRequest("User already exist");
 
+            var userEmail = await _userService.GetUserByEmailAsync(userDto.Email);
+
+            if (userEmail != null) return BadRequest("User already exist with same email");
+
             user = new ApplicationUser
             {
                 Username = userDto.Username,
                 Password = userDto.Password,
-                FullName = userDto.FullName
+                FullName = userDto.FullName,
+                Email = userDto.Email
             };
 
             await _userService.CreateUser(user);

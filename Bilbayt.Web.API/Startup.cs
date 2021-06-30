@@ -25,6 +25,9 @@ using System.IO;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Bilbayt.Web.API.BackgroundJob.Config;
+using Bilbayt.Web.API.BackgroundJob.Jobs;
+using Bilbayt.Web.API.BackgroundJob;
 
 namespace Bilbayt.Web.API
 {
@@ -88,8 +91,12 @@ namespace Bilbayt.Web.API
                   });
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IEmailQueueRepository, EmailQueueRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IEmailTemplateService, EmailTemplateService>();
+
+            services.AddBackgroundJob<EmailQueueJob>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

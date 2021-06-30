@@ -16,6 +16,13 @@ namespace Bilbayt.Data.Repositories
 
         }
 
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            var user = (await FindAsync(x => x.Email == email)).FirstOrDefault();
+
+            return user;
+        }
+
         public async Task<ApplicationUser> GetUserByUsernameAsync(string username)
         {
             var user = (await FindAsync(x => x.Username == username)).FirstOrDefault();

@@ -9,5 +9,6 @@ namespace Bilbayt.Data.Interfaces
     public interface IUserRepository : IBaseRepository<ApplicationUser>
     {
         Task<ApplicationUser> GetUserByUsernameAsync(string username);
+        Task<ApplicationUser> GetUserByEmailAsync(string email);
     }
 }

@@ -1,0 +1,5 @@
+﻿Dear {0},
+
+Your registraion was successfully completed.
+
+Regards

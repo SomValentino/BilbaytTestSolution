@@ -16,6 +16,8 @@ namespace Bilbayt.Domain
         [BsonRequired]
         public string Username { get; set; }
         [BsonRequired]
+        public string Email { get; set; }
+        [BsonRequired]
         public string Password { get; set; }
         [BsonRequired]
         public string FullName { get; set; }

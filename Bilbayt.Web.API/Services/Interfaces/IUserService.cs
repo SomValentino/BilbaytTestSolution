@@ -10,6 +10,7 @@ namespace Bilbayt.Web.API.Services.Interfaces
     {
         Task<ApplicationUser> CreateUser(ApplicationUser user);
         Task<ApplicationUser> GetUserByUsernameAsync(string username);
+        Task<ApplicationUser> GetUserByEmailAsync(string username);
         Task<ApplicationUser> GetUserByIdAsync(string id);
     }
 }
