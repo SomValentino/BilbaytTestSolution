@@ -20,14 +20,19 @@ namespace Bilbayt.Web.API.Services
         public async Task<ApplicationUser> CreateUser(ApplicationUser user)
         {
             user.Password = user.Password.Hash();
-            var usrdb = await _userRepository.Create(user);
+            var usrdb = await _userRepository.CreateAsync(user);
 
             return usrdb;
         }
 
-        public Task<ApplicationUser> GetUserByUsername(string username)
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
         {
-            return _userRepository.GetUserByUsernameAsync(username);
+            return await _userRepository.GetAsync(id);
+        }
+
+        public async Task<ApplicationUser> GetUserByUsernameAsync(string username)
+        {
+            return await _userRepository.GetUserByUsernameAsync(username);
         }
     }
 }

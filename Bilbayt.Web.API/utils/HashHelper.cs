@@ -8,7 +8,7 @@ namespace Bilbayt.Web.API.utils
 {
     public static class HashHelper
     {
-        public string Hash(this string password, byte[] salt = null)
+        public static string Hash(this string password, byte[] salt = null)
         {
             if(salt == null)
                salt = password.GenerateSalt();
@@ -23,9 +23,9 @@ namespace Bilbayt.Web.API.utils
             return Convert.ToBase64String(hashBytes);
         }
 
-        public bool compare(this string password, string verifyPassword)
+        public static bool compare(this string password, string verifyPassword)
         {
-            var hashbytes = System.Text.Encoding.UTF8.GetBytes(password);
+            var hashbytes = Convert.FromBase64String(password);
 
             var salt = new byte[16];
 

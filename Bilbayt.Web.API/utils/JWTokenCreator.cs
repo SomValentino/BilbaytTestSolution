@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace Bilbayt.Web.API.utils
@@ -16,7 +15,7 @@ namespace Bilbayt.Web.API.utils
         {
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtSigningKey));
 
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

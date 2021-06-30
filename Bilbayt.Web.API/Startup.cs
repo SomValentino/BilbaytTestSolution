@@ -19,6 +19,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.Options;
+using System.Reflection;
+using System.IO;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Bilbayt.Web.API
 {
@@ -39,14 +45,22 @@ namespace Bilbayt.Web.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bilbayt.Web.API", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var path = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(path);
             });
 
-            services.Configure<DataContextSetting>(
-               Configuration.GetSection(nameof(DataContextSetting)));
+            services.AddScoped<IDataContextSetting, DataContextSetting>(options =>
+            {
+                return new DataContextSetting
+                {
+                    ConnectionString = Configuration.GetValue<string>("connectionString"),
+                    DatabaseName = Configuration.GetValue<string>("databaseName")
+                };
+            });
 
-            services.AddSingleton<IDataContextSetting>(sp =>
-                sp.GetRequiredService<IOptions<DataContextSetting>>().Value);
-
+            var issuer = Configuration.GetValue<string>("baseUrl");
+            var key = Configuration.GetValue<string>("jwtSecret");
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   .AddJwtBearer(options =>
                   {
@@ -79,7 +93,7 @@ namespace Bilbayt.Web.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -88,7 +102,22 @@ namespace Bilbayt.Web.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bilbayt.Web.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            app.UseExceptionHandler(builder =>
+            {
+                builder.Run(async context =>
+                {
+                    context.Response.ContentType = "application/json";
+                    var exception = context.Features.Get<IExceptionHandlerFeature>();
+
+                    logger.LogError(exception.Error.Message, exception.Error);
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    await context.Response.WriteAsync(JsonConvert
+                        .SerializeObject(new { Success = false, ErrorMessage = exception.Error.Message }));
+
+                });
+            });
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

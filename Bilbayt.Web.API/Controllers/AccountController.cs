@@ -23,35 +23,35 @@ namespace Bilbayt.Web.API.Controllers
             _loginService = loginService;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDto userDto)
         {
-            var user = await _userService.GetUserByUsername(userDto.Username);
+            var user = await _userService.GetUserByUsernameAsync(userDto.Username);
 
             if (user != null) return BadRequest("User already exist");
 
-            var user = new ApplicationUser
+            user = new ApplicationUser
             {
                 Username = userDto.Username,
                 Password = userDto.Password,
                 FullName = userDto.FullName
-            }
+            };
 
             await _userService.CreateUser(user);
 
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var user = await _userService.GetUserByUsername(loginDto.Username);
+            var user = await _userService.GetUserByUsernameAsync(loginDto.Username);
 
             if (user == null) return BadRequest("Invalid username or password");
 
             var identityResult = await _loginService.SignIn(user, loginDto.Password);
 
-            if(!identityResult.IsSuccess) return BadRequest("Invalid username or password");
+            if(!identityResult.IsSuccess) return BadRequest(identityResult.Error);
 
             return Ok(new { token = identityResult.Token });
         }

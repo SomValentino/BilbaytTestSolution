@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  database:
+    image : mongo
+    container_name: mongodb
+    volumes:
+        - mongodata:/database/db
+    ports:
+        - 27017:27017
+    restart: unless-stopped
+  backend:
+    build: ./
+    ports:
+      - '5000:80'
+    volumes: 
+      - logs:/Bilbayt.Web.API/logs
+    env_file: 
+      - ./backend.env
+
+volumes: 
+  logs:
+  database:
+  mongodata:

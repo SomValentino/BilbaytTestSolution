@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bilbayt.Models\Bilbayt.Domain.csproj" />
+    <ProjectReference Include="..\Bilbayt.Domain\Bilbayt.Domain.csproj" />
   </ItemGroup>
 
 </Project>

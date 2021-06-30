@@ -14,7 +14,7 @@ namespace Bilbayt.Data.Interfaces
         Task<TEntity> CreateAsync(TEntity entity);
         Task UpdateAsync(string Id, TEntity entity);
         Task DeleteAsync(string Id);
-        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity,bool>> predicate)
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
 
     }
 }

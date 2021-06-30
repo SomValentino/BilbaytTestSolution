@@ -1,5 +1,4 @@
 ﻿using Bilbayt.Domain;
-using Bilbayt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace Bilbayt.Web.API.Services.Interfaces
     public interface IUserService
     {
         Task<ApplicationUser> CreateUser(ApplicationUser user);
-        Task<ApplicationUser> GetUserByUsername(string username);
+        Task<ApplicationUser> GetUserByUsernameAsync(string username);
+        Task<ApplicationUser> GetUserByIdAsync(string id);
     }
 }

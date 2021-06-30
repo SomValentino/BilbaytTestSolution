@@ -11,7 +11,7 @@ namespace Bilbayt.Data.Repositories
 {
     public class UserRepository : BaseRepository<ApplicationUser>, IUserRepository
     {
-        public UserRepository(IDataContextSetting dataContextSetting):base(dataContextSetting)
+        public UserRepository(IDataContextSetting dataContextSetting):base(dataContextSetting, nameof(ApplicationUser))
         {
 
         }

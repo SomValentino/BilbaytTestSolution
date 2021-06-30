@@ -15,12 +15,12 @@ namespace Bilbayt.Data.Repositories
     {
         private readonly IMongoCollection<TEntity> _collection;
 
-        public  BaseRepository(IDataContextSetting dataContextSetting)
+        public  BaseRepository(IDataContextSetting dataContextSetting, string collectionName)
         {
             var client = new MongoClient(dataContextSetting.ConnectionString);
             var database = client.GetDatabase(dataContextSetting.DatabaseName);
 
-            _collection = database.GetCollection<TEntity>(dataContextSetting.CollectionName);
+            _collection = database.GetCollection<TEntity>(collectionName);
         }
         public async Task<TEntity> CreateAsync(TEntity entity)
         {

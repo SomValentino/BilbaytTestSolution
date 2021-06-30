@@ -8,7 +8,6 @@ namespace Bilbayt.Data.Context
 {
     public interface IDataContextSetting
     {
-        string CollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }
