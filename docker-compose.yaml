@@ -2,7 +2,7 @@ version: "3.8"
 services:
   database:
     image : mongo
-    container_name: mongodb
+    container_name: mongodb34
     volumes:
         - mongodata:/database/db
     ports:

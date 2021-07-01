@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
 COPY ["Bilbayt.Web.API/Bilbayt.Web.API.csproj", "Bilbayt.Web.API/"]
 COPY ["Bilbayt.Domain/Bilbayt.Domain.csproj", "Bilbayt.Domain/"]
