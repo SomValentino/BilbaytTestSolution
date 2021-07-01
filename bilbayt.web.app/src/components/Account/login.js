@@ -10,15 +10,16 @@ const Login = (props) => {
     const [error, setError] = useState(null)
     const [valid, setValid] = useState(login.username && login.password)
     const history = useHistory()
-    let makeapicall = false
 
     const loginCall = async () => {
        try {
            const response = await fetch("http://localhost:5000/api/account/login",{
                method: 'POST',
+               headers: {"Content-Type": "application/json"},
                body: JSON.stringify(login)
            })
-           if(response.status >= 200 && response.status >= 299) throw new Error(response.statusText)
+           if(response.status === 400) throw new Error('invalid username or password')
+           if(response.status >= 200 && response.status >= 299) throw new Error("Something went wrong. kindly try again")
            
            const data = await response.json()
            setloading(false)
@@ -28,6 +29,9 @@ const Login = (props) => {
        } catch (error) {
            setloading(false);
            setError(error.message)
+           setTimeout(() => {
+               setError(null)
+           },2000)
        }
     }
     
@@ -54,9 +58,9 @@ const Login = (props) => {
             <h4>Login</h4>
             <p>If you already have credential</p>
             {error && (
-              <span className="alert alert-danger" role="alert">
+              <div className="alert alert-danger" role="alert">
                 {error}
-              </span>
+              </div>
             )}
           </div>
           <form>
