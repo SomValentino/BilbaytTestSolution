@@ -12,6 +12,8 @@ services:
     build: ./
     ports:
       - 5000:80
+    volumes: 
+      - ./Bilbayt.Web.API/Templates:/app/Templates
     env_file: 
       - ./backend.env
 

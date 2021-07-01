@@ -19,7 +19,7 @@ namespace Bilbayt.Web.API.Services
         }
         public async Task<string> CreateRegistrationEmailTemplate(ApplicationUser user)
         {
-            var filePath = Path.Combine(_hostinEnvironment.ContentRootPath, @"Templates\Register.txt");
+            var filePath = Path.Combine(_hostinEnvironment.ContentRootPath, "Templates/Register.txt");
             var emailTemplate = await File.ReadAllTextAsync(filePath);
 
             return string.Format(emailTemplate, user.FullName);
