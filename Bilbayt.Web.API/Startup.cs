@@ -89,7 +89,10 @@ namespace Bilbayt.Web.API
                           }
                       };
                   });
-
+            services.AddCors(options => options.AddPolicy("ApplicantPolicy", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEmailQueueRepository, EmailQueueRepository>();
             services.AddScoped<IUserService, UserService>();
@@ -127,7 +130,7 @@ namespace Bilbayt.Web.API
             });
 
             //app.UseHttpsRedirection();
-
+            app.UseCors("ApplicantPolicy");
             app.UseRouting();
 
             app.UseAuthentication();
