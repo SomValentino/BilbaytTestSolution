@@ -1,0 +1,20 @@
+.button {
+  background-color: transparent;
+  border-color: #1ad1b9;
+  color: #1ad1b9;
+}
+
+.button:hover,
+.button:active {
+  color: white;
+}
+
+.button span {
+  margin: 0 0.5rem;
+}
+.center{
+    text-align: center;
+}
+.spincolor{
+    color: #1ad1b9;
+}
