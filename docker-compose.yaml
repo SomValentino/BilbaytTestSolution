@@ -11,13 +11,9 @@ services:
   backend:
     build: ./
     ports:
-      - '5000:80'
-    volumes: 
-      - logs:/Bilbayt.Web.API/logs
+      - 5000:80
     env_file: 
       - ./backend.env
 
 volumes: 
-  logs:
-  database:
   mongodata:

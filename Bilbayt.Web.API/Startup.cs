@@ -105,9 +105,11 @@ namespace Bilbayt.Web.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bilbayt.Web.API v1"));
+                
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bilbayt.Web.API v1"));
 
             app.UseExceptionHandler(builder =>
             {
