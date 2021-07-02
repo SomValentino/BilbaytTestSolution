@@ -4,7 +4,7 @@ import classes from './login.module.css'
 import {useHistory} from 'react-router-dom'
 
 
-const Login = (props) => {
+const Login = () => {
     const [login, setLogin]  = useState({username:"",password: ""})
     const [loading, setloading] = useState(false)
     const [error, setError] = useState(null)
@@ -106,11 +106,13 @@ const Login = (props) => {
                   className={classes.button}
                   onClick={handleClick}
                 >
-                  {loading ? <div className={`spinner-border text-primary ${classes.spincolor}`} role="status">
-                    <span className="sr-only"></span>
-                  </div> : "Login"
-                  }
-                  
+                  {loading ? (
+                    <div class="spinner-border text-info" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               )}
             </div>

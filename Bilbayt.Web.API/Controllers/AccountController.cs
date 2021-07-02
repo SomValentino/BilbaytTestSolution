@@ -28,11 +28,11 @@ namespace Bilbayt.Web.API.Controllers
         {
             var user = await _userService.GetUserByUsernameAsync(userDto.Username);
 
-            if (user != null) return BadRequest("User already exist");
+            if (user != null) return BadRequest(new { errors = "User already exist" });
 
             var userEmail = await _userService.GetUserByEmailAsync(userDto.Email);
 
-            if (userEmail != null) return BadRequest("User already exist with same email");
+            if (userEmail != null) return BadRequest(new { errors = "User already exist with same email" });
 
             user = new ApplicationUser
             {
@@ -52,7 +52,7 @@ namespace Bilbayt.Web.API.Controllers
         {
             var user = await _userService.GetUserByUsernameAsync(loginDto.Username);
 
-            if (user == null) return BadRequest("Invalid username or password");
+            if (user == null) return BadRequest(new { errors = "Invalid username or password" });
 
             var identityResult = await _loginService.SignIn(user, loginDto.Password);
 

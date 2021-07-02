@@ -10,12 +10,12 @@ const Layout = () => {
       <Router>
         <NavBar />
         <Switch>
-        <Route exact path='/'>
-          <Login />
-        </Route>
-        <Route exact path='/people'>
-          <Register />
-        </Route>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
         </Switch>
       </Router>
     </Fragment>

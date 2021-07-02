@@ -17,7 +17,7 @@ namespace Bilbayt.Web.API.Dto.Request
         public string Email { get; set; }
         [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,100}$",
-            ErrorMessage = "Inavlid Password. Password of the user must contain aleast 8 characters , 1 CAP, 1 special, 1 Number")]
+            ErrorMessage = "Invalid Password. Password of the user must contain aleast 8 characters , 1 CAP, 1 special, 1 Number")]
         public string Password { get; set; }
         [Required]
         [Compare(nameof(Password))]
