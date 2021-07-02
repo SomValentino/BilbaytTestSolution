@@ -1,7 +1,7 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useContext} from 'react'
 import Card from '../UI/card'
 import classes from './login.module.css'
-import {useHistory} from 'react-router-dom'
+import {PathContext} from '../Layout/navbar'
 
 
 const Login = () => {
@@ -9,7 +9,10 @@ const Login = () => {
     const [loading, setloading] = useState(false)
     const [error, setError] = useState(null)
     const [valid, setValid] = useState(login.username && login.password)
-    const history = useHistory()
+    
+    const {moveToPath} = useContext(PathContext)
+
+    console.log(moveToPath)
 
     const loginCall = async () => {
        try {
@@ -25,7 +28,7 @@ const Login = () => {
            setloading(false)
            localStorage.setItem('token', data.token)
 
-           history.push('/profile')
+           moveToPath('/profile')
        } catch (error) {
            setloading(false);
            setError(error.message)
