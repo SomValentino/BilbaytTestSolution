@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bilbayt.Domain;
+using Bilbayt.Web.API.Dto.Response;
 
 namespace Bilbayt.Web.API.Controllers
 {
@@ -28,11 +29,11 @@ namespace Bilbayt.Web.API.Controllers
         {
             var user = await _userService.GetUserByUsernameAsync(userDto.Username);
 
-            if (user != null) return BadRequest(new { errors = "User already exist" });
+            if (user != null) return BadRequest(new ErrorDto { Errors = "User already exist" });
 
             var userEmail = await _userService.GetUserByEmailAsync(userDto.Email);
 
-            if (userEmail != null) return BadRequest(new { errors = "User already exist with same email" });
+            if (userEmail != null) return BadRequest(new ErrorDto { Errors = "User already exist with same email" });
 
             user = new ApplicationUser
             {
@@ -52,13 +53,13 @@ namespace Bilbayt.Web.API.Controllers
         {
             var user = await _userService.GetUserByUsernameAsync(loginDto.Username);
 
-            if (user == null) return BadRequest(new { errors = "Invalid username or password" });
+            if (user == null) return BadRequest(new ErrorDto { Errors = "Invalid username or password" });
 
             var identityResult = await _loginService.SignIn(user, loginDto.Password);
 
-            if(!identityResult.IsSuccess) return BadRequest(identityResult.Error);
+            if(!identityResult.IsSuccess) return BadRequest( new ErrorDto { Errors = identityResult.Error });
 
-            return Ok(new { token = identityResult.Token });
+            return Ok(new TokenDto { Token = identityResult.Token });
         }
     }
 }

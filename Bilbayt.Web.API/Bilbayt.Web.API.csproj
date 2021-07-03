@@ -27,8 +27,12 @@
 
   <ItemGroup>
     <Folder Include="Database\" />
+    <Folder Include="Dto\Response\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Dto\Response\" />
+  </ItemGroup>
   <ItemGroup>
     <None Update="Templates\Register.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

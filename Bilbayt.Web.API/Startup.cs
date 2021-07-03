@@ -124,7 +124,7 @@ namespace Bilbayt.Web.API
                     logger.LogError(exception.Error.Message, exception.Error);
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     await context.Response.WriteAsync(JsonConvert
-                        .SerializeObject(new { Success = false, ErrorMessage = exception.Error.Message }));
+                        .SerializeObject(new { errors = exception.Error.Message }));
 
                 });
             });
