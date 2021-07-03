@@ -16,6 +16,18 @@ services:
       - ./Bilbayt.Web.API/Templates:/app/Templates
     env_file: 
       - ./backend.env
+    depends_on: 
+      - database
+  frontend:
+    build: ./bilbayt.web.app
+    ports:
+      - 3005:3000
+    stdin_open: true
+    tty: true
+    depends_on: 
+      - backend
+    env_file: 
+      - ./frontend.env
 
 volumes: 
   mongodata:

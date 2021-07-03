@@ -14,6 +14,9 @@ const Register = () => {
     
     const history = useHistory()
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,100}$/
+    const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const { REACT_APP_BaseUrl } = process.env;
+    console.log(process.env)
 
     const validateForm = () => {
         if(touch){
@@ -24,6 +27,8 @@ const Register = () => {
 
             if (login.username.length < 5 || login.username.length > 50)
               iserror = true;
+
+            if(!mailformat.test(login.email)) iserror = true
 
             if (!regex.test(login.password)) iserror = true;
 
@@ -41,10 +46,9 @@ const Register = () => {
     const registerCall = async () => {
       try {
         const jsonData =  JSON.stringify(login)
-        console.log(jsonData)
-        console.log(history)
+
         const response = await fetch(
-          "http://localhost:5000/api/account/register",
+          `${REACT_APP_BaseUrl}/api/account/register`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -109,6 +113,9 @@ const Register = () => {
     return (
       <Card>
         <article>
+          <div className={classes.center}>
+            <h4>Registration</h4>
+          </div>
           {message && (
             <div className="alert alert-success" role="alert">
               {message}
@@ -137,14 +144,16 @@ const Register = () => {
                   minLength="5"
                 />
                 {touch &&
-                  (login.fullName.length < 5 || login.fullName.length > 500) && (
+                  (login.fullName.length < 5 ||
+                    login.fullName.length > 500) && (
                     <span className={classes.spincolor}>
                       fullname is required and must be between 5 to 500
                       characters in length
                     </span>
                   )}
               </div>
-            </div><br/>
+            </div>
+            <br />
             <div className="form-group row">
               <label htmlFor="username" className="control-label col-md-3">
                 Username
@@ -185,6 +194,11 @@ const Register = () => {
                   className="form-control"
                   required
                 />
+                {touch && !mailformat.test(login.email) && (
+                  <span className={classes.spincolor}>
+                    Invalid email address
+                  </span>
+                )}
               </div>
             </div>
             <br />

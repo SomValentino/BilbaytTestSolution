@@ -5,6 +5,7 @@ import {useHistory} from 'react-router-dom'
 import {useState} from 'react'
 import Login from "../Account/login";
 import Register from "../Account/register";
+import Profile from '../user/profile'
 
 const PathContext = React.createContext()
 const Navbar = () => {
@@ -17,7 +18,10 @@ const Navbar = () => {
   const moveToPath = (currentPath) =>{
     let nextPath = "";
     if (currentPath === "/" || currentPath === "/login") nextPath = "/register";
-    else if (currentPath === path || currentPath === "/register") nextPath = "/";
+    else if (currentPath === path || currentPath === "/register"){
+      nextPath = "/";
+      localStorage.removeItem('token')
+    } 
     else nextPath = currentPath;
     history.push(nextPath);
     setPath(nextPath);
@@ -52,6 +56,9 @@ const Navbar = () => {
         </Route>
         <Route exact path="/register">
           <Register />
+        </Route>
+        <Route exact path="/profile">
+          <Profile/>
         </Route>
       </Switch>
     </PathContext.Provider>

@@ -11,16 +11,18 @@ const Login = () => {
     const [valid, setValid] = useState(login.username && login.password)
     
     const {moveToPath} = useContext(PathContext)
-
-    console.log(moveToPath)
+    const { REACT_APP_BaseUrl } = process.env;
 
     const loginCall = async () => {
        try {
-           const response = await fetch("http://localhost:5000/api/account/login",{
-               method: 'POST',
-               headers: {"Content-Type": "application/json"},
+           const response = await fetch(
+             `${REACT_APP_BaseUrl}/api/account/login`,
+             {
+               method: "POST",
+               headers: { "Content-Type": "application/json" },
                body: JSON.stringify(login)
-           })
+             }
+           );
            if(response.status === 400) throw new Error('invalid username or password')
            if(response.status >= 200 && response.status >= 299) throw new Error("Something went wrong. kindly try again")
            
@@ -97,7 +99,7 @@ const Login = () => {
                   className="form-control"
                 />
               </div>
-            </div>
+            </div><br/>
             <div>
               {!valid ? (
                 <button type="submit" className={classes.button} disabled>
