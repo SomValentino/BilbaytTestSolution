@@ -20,8 +20,14 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '**/*.Tests.csproj'
+      displayName: Run Tests
     - task: DockerCompose@0
       inputs:
         containerregistrytype: 'Container Registry'
-        dockerComposeFile: '**/docker-compose.yml'
+        dockerComposeFile: 'docker-compose.yml'
         action: 'Run a Docker Compose command'
+      displayName: Run Docker compose file
