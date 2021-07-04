@@ -14,6 +14,7 @@ services:
       - 5000:80
     volumes: 
       - ./Bilbayt.Web.API/Templates:/app/Templates
+      - logs:/Bilbayt.Web.API/logs
     env_file: 
       - ./backend.env
     depends_on: 
@@ -31,3 +32,4 @@ services:
 
 volumes: 
   mongodata:
+  logs:
