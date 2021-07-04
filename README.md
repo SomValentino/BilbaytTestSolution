@@ -9,12 +9,12 @@ The solution has five project listed and described below:
 5. bilbayt.web.app: The react.js web project for the front end application.
 
 # Running Solution with Docker
-The solution including the web api, database and front end applications has been setup to run with docker as shown in the docker-compose.yaml file in the root directory. If you docker installed in your system, Run the command below in your cmd:
+The solution including the web api, database and front end applications has been setup to run with docker as shown in the docker-compose.yaml file in the root directory. If you have docker installed in your system, Run the command below in your cmd:
 
 ```
 docker-compose up --build
 ```
-The command with create docker containers for the api, react.js app and mongo database. The containers can be accessed in the following urls:
+The command will create docker containers for the api, react.js app and mongo database. The containers can be accessed with the following urls:
 
 a. API:  http://localhost:5000/swagger
 b. Web App: http://localhost:3005
@@ -44,11 +44,11 @@ The above command will start the development server for the react.js application
 
 # Sending Email After Registration
 
-The email functionality has been implemented in a asynchronous manner. It is not sent immediately when a successful registration is completed. Rather it is queued in the database and a background job written as a .net IHostedService that runs every 2 mins to pick up pending emails which is then sent out to the SendGrid server. The benefits of this approach is:
+The email functionality has been implemented in an asynchronous manner. It is not sent immediately when a successful registration is completed. Rather it is queued in the database and a background job written as a .net IHostedService that runs every 2 mins to pick up pending emails which is then sent out to the SendGrid server. The benefits of this approach is:
 
 1. Emails won't lost if network issues occur while sending emails.
 2. The api doesn't have delay the registration response while sending the emails and request won't fail because errors occured while sending emails.
-3. Emails that are not sent due errors can be later resent by changing their status in the db
+3. Emails that are not sent due errors can be later resent by changing their status in the db.
 
 # Logging
 
