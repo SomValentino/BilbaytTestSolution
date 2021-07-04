@@ -50,5 +50,9 @@ The email functionality has been implemented in a asynchronous manner. It is not
 2. The api doesn't have delay the registration response while sending the emails and request won't fail because errors occured while sending emails.
 3. Emails that are not sent due errors can be later resent by changing their status in the db
 
+# Logging
+
+Logging has been implemented using Serilog to file. It can be found in Bilbayt.Web.API/logs folder.
+
 # Deployment
 An azure build pipeline has been created as shown in the azure-pipeline.yml file that builds each projects and run unit tests. The status of the buid is displayed in the badge above.
