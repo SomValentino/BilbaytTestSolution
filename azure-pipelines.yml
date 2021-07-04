@@ -39,6 +39,17 @@ stages:
         command: 'test'
         projects: '**/*.Tests.csproj'
       displayName: Run Tests
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: 'bilbayt.web.app'
+      displayName: Install react.js dependencies
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: 'bilbayt.web.app'
+        customCommand: 'build'
+      displayName: Build react.js app
     - task: DockerCompose@0
       inputs:
         containerregistrytype: 'Container Registry'
