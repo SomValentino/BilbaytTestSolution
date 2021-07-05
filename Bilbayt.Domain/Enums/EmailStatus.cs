@@ -13,14 +13,4 @@ namespace Bilbayt.Domain.Enums
         Processing = 3,
         Error = 4
     }
-
-    public enum EmailMessageType
-    {
-        CommentsAddedBP = 1,
-        NewMetricAdded,
-        CommentsAddedBE,
-        SubmitBE,
-        DeclineBE,
-        ApproveBE
-    }
 }
